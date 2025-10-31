@@ -1,7 +1,6 @@
 # 🧠 Dotfiles
 
-Personal configuration files for my development environments — streamlined, portable, and version‑controlled using **GNU Stow**.  
-Tuned for productivity, minimalism, and consistency across macOS and Linux machines.
+Personal configuration files for my development environments.
 
 ---
 
