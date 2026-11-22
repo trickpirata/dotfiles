@@ -1,0 +1,5 @@
+# Catppuccin Frappe for delta (used by lazygit via --config)
+[delta]
+    dark = true
+    syntax-theme = Catppuccin Frappe
+    line-numbers = true

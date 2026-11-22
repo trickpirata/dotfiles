@@ -15,6 +15,12 @@ This repository contains the key configuration files that shape my command-line 
 | `.zprofile` | Login shell setup — exports PATHs and environment variables. |
 | `.vimrc` | Vim configuration — sensible defaults, syntax highlighting, indentation. |
 | `.gitignore` | Global Git ignore patterns. |
+| `config/lazygit/config.yml` | lazygit — uses delta as the diff pager (`\|` cycles inline ↔ side-by-side). |
+| `config/delta/catppuccin.gitconfig` | delta — Catppuccin Frappe colors, line numbers, word-level diff highlighting. Loaded via `delta --config`, so `~/.gitconfig` is untouched. |
+
+> 🔗 **App configs** under `config/` don’t live at `$HOME`’s root, so `bootstrap.sh` links each to its real location:
+> - `config/lazygit/config.yml` → `~/Library/Application Support/lazygit/config.yml` (macOS) or `~/.config/lazygit/config.yml` (Linux)
+> - `config/delta/catppuccin.gitconfig` → `~/.config/delta/catppuccin.gitconfig`
 
 > ℹ️ **Note on Stow layout:** I currently keep dotfiles at the repo root. The bootstrap script supports both layouts:
 > - **Root files** (this repo’s current state) → it will safely symlink them.
@@ -237,6 +243,7 @@ This will:
 
 - **Shell:** [Zsh](https://www.zsh.org) + [Oh My Zsh](https://ohmyz.sh) + [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - **Editor:** [Vim](https://www.vim.org)
+- **Git UI:** [lazygit](https://github.com/jesseduffield/lazygit) + [delta](https://github.com/dandavison/delta) (Catppuccin Frappe)
 - **Package Management:** [Homebrew](https://brew.sh) / apt / dnf / pacman
 - **Symlink Management:** [GNU Stow](https://www.gnu.org/software/stow/)
 - **Terminal:** iTerm2 / Alacritty (Catppuccin or Solarized themes)
@@ -254,7 +261,8 @@ This will:
 
 ## 🧭 Roadmap
 
-- [ ] Add configs for `lazygit`, `iterm2`
+- [x] Add config for `lazygit` (+ delta)
+- [ ] Add config for `iterm2`
 
 ---
 

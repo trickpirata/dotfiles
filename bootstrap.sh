@@ -49,7 +49,7 @@ install_packages() {
         test -d /opt/homebrew && eval "$(/opt/homebrew/bin/brew shellenv)"
       fi
       brew update
-      brew install git stow zsh >/dev/null || true
+      brew install git stow zsh lazygit git-delta >/dev/null || true
       ;;
     apt)
       sudo apt update -y
@@ -144,6 +144,35 @@ else
     fi
   done
   ok "Symlinks created"
+fi
+
+# ---------- App configs (config/<app>/...) ----------
+# lazygit reads ~/Library/Application Support/lazygit on macOS, ~/.config/lazygit elsewhere.
+if [ "$OS_FRIENDLY" = "macOS" ]; then
+  LAZYGIT_DIR="$HOME/Library/Application Support/lazygit"
+else
+  LAZYGIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/lazygit"
+fi
+
+# "repo source|target" pairs
+APP_CONFIGS=(
+  "config/lazygit/config.yml|$LAZYGIT_DIR/config.yml"
+  "config/delta/catppuccin.gitconfig|$HOME/.config/delta/catppuccin.gitconfig"
+)
+
+header "Linking app configs"
+for pair in "${APP_CONFIGS[@]}"; do
+  src="${pair%%|*}"; dest="${pair#*|}"
+  [ -e "$src" ] || continue
+  mkdir -p "$(dirname "$dest")"
+  backup_if_needed "$dest"
+  ln -sfn "$PWD/$src" "$dest"
+  info "Linked $dest"
+done
+ok "App configs linked"
+
+if ! command -v lazygit >/dev/null 2>&1 || ! command -v delta >/dev/null 2>&1; then
+  warn "lazygit and/or delta (git-delta) not installed — install them for the git UI config to take effect."
 fi
 
 # ---------- Set default shell to zsh ----------

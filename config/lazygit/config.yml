@@ -1,0 +1,8 @@
+git:
+  diffRenderers:
+    # delta + Catppuccin Mocha: syntax highlighting + word-level change highlighting
+    - command: delta --config ~/.config/delta/catppuccin.gitconfig --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      colorArg: always
+    # side-by-side view — cycle pagers with `|` inside lazygit
+    - command: delta --config ~/.config/delta/catppuccin.gitconfig --paging=never --side-by-side
+      colorArg: always
